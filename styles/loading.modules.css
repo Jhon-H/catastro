@@ -1,0 +1,11 @@
+.disabledDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 100vw;
+  width: fit-content;
+  min-height: 100vh;
+  height: fit-content;
+  opacity: .7;
+  background-color: rgb(237, 238, 238);
+}
