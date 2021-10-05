@@ -4,10 +4,12 @@ import Head from 'next/head';
 import { Layout } from 'antd';
 
 function _Layout({ title, children }) {
+  const { Content } = Layout;
+
   return (
     <>
       <Head>
-        <title> {title} </title>
+        <title> {`Catastro | ${title}`} </title>
       </Head>
 
       <Layout className='layout' style={{ minHeight: '100vh' }}>

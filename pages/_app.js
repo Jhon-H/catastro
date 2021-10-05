@@ -5,6 +5,7 @@ import Head from 'next/head';
 import NProgress from 'nprogress';
 import client from '../lib/apolloConfig';
 import '../styles/nprogress.css';
+import 'antd/dist/antd.css';
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -26,7 +27,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta charset='UTF-8' />
+        <meta charSet='UTF-8' />
         <meta name='viewport' content='initial-scale=1.0, width=device-width' />
         <meta name='description' content='Manejo de datos catastrales de los municipios de Colombia' />
       </Head>
