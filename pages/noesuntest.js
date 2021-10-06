@@ -2,7 +2,7 @@ import { notification, Space } from 'antd';
 import { SyncOutlined } from '@ant-design/icons';
 import { Card } from 'antd';
 
-function Loading() {
+function NoTest() {
   return (
     <>
       <Space>
@@ -15,23 +15,22 @@ function Loading() {
           })
         }
       </Space>
-      <Space
-        direction='horizontal'
-        size={50}
-        wrap
-      >
-        {new Array(9).fill(null).map((_, idx) => (
-          <Card
-            style={{ width: 400, height: 200 }}
-            bordered='false'
-            size={100}
-            loading='true'
-            key={idx}
-          ></Card>
+      <Space wrap direction='horizontal'>
+        {new Array(15).fill(null).map((_, idx) => (
+          <Card style={{ width: 300, marginTop: 16 }} loading='true' key={idx}>
+            {/* <Meta
+                avatar={
+                  <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                }
+                title="Card title"
+                description="This is the description"
+              />
+            */}
+          </Card>
         ))}
       </Space>
     </>
   )
 }
 
-export default Loading;
+export default NoTest;

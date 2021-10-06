@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { ApolloProvider } from '@apollo/client';
 import { useEffect } from 'react';
-import Head from 'next/head';
+import { Provider } from 'react-redux'
 import NProgress from 'nprogress';
-import client from '../lib/apolloConfig';
+import Head from 'next/head';
+import client from '../lib/apollo';
+import store from '../store';
 import '../styles/nprogress.css';
 import 'antd/dist/antd.css';
 
@@ -33,11 +35,12 @@ function MyApp({ Component, pageProps }) {
       </Head>
 
       <ApolloProvider client={client}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </ApolloProvider>
     </>
   )
 }
 
-export default MyApp
-
+export default MyApp;

@@ -1,19 +1,22 @@
-import Link from 'next/link';
 import { Layout, Menu } from 'antd';
+import Link from 'next/link';
+import styles from '../../styles/logo.module.css';
+import Search from './Search';
+
 
 const customPaths = [
   { path: '/', name: 'Home' },
   { path: '/admin', name: 'Administrar' },
-  { path: '/filter', name: 'Filtrar Información' }
 ];
 
-function Navbar() {
+function NavbarDiv() {
   const { Header } = Layout;
 
   return (
-    <Header>
-      <div className='logo' />
-      <Menu theme="dark" mode="horizontal" >
+    <Header style={{ padding: '0 200px' }}>
+      <div className={styles.logo} />
+
+      <Menu theme='dark' mode='horizontal' >
         {customPaths.map(({ path, name }) => (
           <Menu.Item key={path}>
             <Link href={path}>
@@ -22,8 +25,10 @@ function Navbar() {
           </Menu.Item>
         ))}
       </Menu>
+
+      <Search />
     </Header>
   )
 }
 
-export default Navbar;
+export default NavbarDiv;

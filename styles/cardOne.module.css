@@ -1,0 +1,17 @@
+.cardContainer {
+  margin-top: 50px;
+  width: min(90vw, 1040px);
+  border: 2px solid #a5aaaf;
+  border-radius: 10px;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.name {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+}

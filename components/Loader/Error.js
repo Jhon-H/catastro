@@ -1,4 +1,3 @@
-import _Layout from '../Layout/Layout';
 import { notification, Space } from 'antd';
 
 function Error() {

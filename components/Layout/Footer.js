@@ -1,13 +1,13 @@
 import { Layout } from 'antd';
 
-function _Footer() {
+function FooterDiv() {
   const { Footer } = Layout;
 
   return (
     <Footer style={{ textAlign: 'center' }}>
-      Ant Design ©2018 Created by Ant UED
+      Catastro ©2021 Creado por Jhon Hernández
     </Footer>
   )
 }
 
-export default _Footer;
+export default FooterDiv;

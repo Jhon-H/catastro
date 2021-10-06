@@ -1,26 +1,30 @@
-import _Navbar from './Navbar';
-import _Footer from  './Footer';
+import NavbarDiv from './Navbar';
+import FooterDiv from './Footer';
 import Head from 'next/head';
 import { Layout } from 'antd';
 
-function _Layout({ title, children }) {
+function LayoutDiv({ title, children }) {
   const { Content } = Layout;
 
   return (
     <>
       <Head>
-        <title> {`Catastro | ${title}`} </title>
+        <title> Catastro | {title} </title>
       </Head>
 
       <Layout className='layout' style={{ minHeight: '100vh' }}>
-        <_Navbar />
-        <Content style={{ padding: '0 50px' }}>
-          <div className="site-layout-content">{children}</div>
+        <NavbarDiv />
+        <Content style={{
+          padding: '20px 200px',
+          display: 'flex',
+          justifyContent: 'center',
+        }}>
+          <div className='site-layout-content'>{children}</div>
         </Content>
-        <_Footer />
+        <FooterDiv />
       </Layout>
     </>
   )
 }
 
-export default _Layout;
+export default LayoutDiv;
