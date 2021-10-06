@@ -39,7 +39,7 @@ function Home() {
         wrap
       >
         {(!loading && data
-          ? data && data.municipio.map(({ name, id }) => (
+          ? data.municipio.map(({ name, id }) => (
             <CardDiv name={name} id={id} key={id} />
           ))
           : <div className={styles.empty}>

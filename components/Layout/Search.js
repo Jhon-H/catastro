@@ -16,7 +16,7 @@ function Search() {
 
   return (
     <div className={styles.search}>
-      {/* <Input
+      <Input
         name='name'
         value={form.name}
         onChange={handleInputChange}
@@ -34,8 +34,7 @@ function Search() {
         placeholder='Buscar por documento'
         suffix={<SearchOutlined />}
         disabled={form.name !== ''}
-      /> */}
-      <p> Hola </p>
+      />
     </div>
   )
 }

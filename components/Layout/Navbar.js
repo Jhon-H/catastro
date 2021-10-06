@@ -24,9 +24,8 @@ function NavbarDiv() {
             </Link>
           </Menu.Item>
         ))}
+        <Menu.Item> <Search /> </Menu.Item>
       </Menu>
-
-      <Search />
     </Header>
   )
 }
