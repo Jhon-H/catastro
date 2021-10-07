@@ -6,7 +6,7 @@
 // *     tiene construcciones en el ? (si o no)
 
 import styles from '../../styles/stylesForm.module.css';
-
+import Form from 'react-bootstrap/Form';
 
 function Terreno({
   terreno: {
@@ -23,7 +23,7 @@ function Terreno({
 
   return (
     <>
-      <input
+      <Form.Control
         name='area'
         className={styles.form_item}
         value={area}
@@ -32,52 +32,52 @@ function Terreno({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='valor_comercial'
         type='number'
         onChange={send}
         value={valor_comercial}
-        placeholder='valor_comercial'
+        placeholder='Valor Comercial'
         required
       />
 
-      <select
+      <Form.Select
         name='type_terreno'
         value={type_terreno}
-        onChange={handleInputChange}
-        placeholder='Elije un tipo'
+        onChange={send}
+        placeholder='Que tipo de terreno es'
         className={styles.form_item}
         required
       >
+        <option value='' selected disabled> ¿Qué tipo de terreno es? </option>
         <option value='rural'> Rural </option>
         <option value='urbano'> Urbano </option>
-      </select>
+      </Form.Select>
 
-
-      <select
+      <Form.Select
         name='fuente_cerca'
         className={styles.form_item}
         required
         onChange={send}
         value={fuente_cerca}
-        placeholder='Fuentes cerca'
       >
+        <option value='' selected disabled> ¿Tiene fuentes de agua cerca? </option>
         <option value='si'> Si </option>
         <option value='no'> No </option>
-      </select>
+      </Form.Select>
 
-      <select
+      <Form.Select
         className={styles.form_item}
         name='have_contrucciones'
         value={have_contrucciones}
         onChange={send}
-        placeholder='Tiene construcciones'
         required
       >
+        <option value='' selected disabled> ¿Tiene construcciones? </option>
         <option value='si'> Si </option>
         <option value='no'> No </option>
-      </select>
+      </Form.Select>
     </>
   )
 }

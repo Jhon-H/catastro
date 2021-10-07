@@ -8,6 +8,7 @@
 // *    correo (opcional)
 
 import styles from '../../styles/stylesForm.module.css';
+import Form from 'react-bootstrap/Form';
 
 function NaturalPerson({
   natural: {
@@ -27,7 +28,7 @@ function NaturalPerson({
   
   return (
     <>
-      <select
+      <Form.Select
         name='type_document'
         className={styles.form_item}
         value={type_document}
@@ -35,12 +36,13 @@ function NaturalPerson({
         placeholder='Tipo de documento'
         required
       >
+        <option value='' selected disabled> Tipo de documento </option>
         <option value='TI'> Tarjeta de identidad </option>
         <option value='PASSPORT'> Pasaport </option>
         <option value='CC'> Cédula </option>
-      </select>
+      </Form.Select>
 
-      <input
+      <Form.Control
         type='number'
         className={styles.form_item}
         name='number_document'
@@ -50,7 +52,7 @@ function NaturalPerson({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='first_name'
         value={first_name}
@@ -59,7 +61,7 @@ function NaturalPerson({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='last_name'
         value={last_name}
@@ -68,7 +70,7 @@ function NaturalPerson({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='direccion'
         value={direccion}
@@ -77,7 +79,8 @@ function NaturalPerson({
         required
       />
 
-      <input
+      <Form.Control
+        type='tel'
         className={styles.form_item}
         name='telefono'
         value={telefono}
@@ -86,7 +89,7 @@ function NaturalPerson({
         required
       />
 
-      <input
+      <Form.Control
         type='email'
         className={styles.form_item}
         name='correo'

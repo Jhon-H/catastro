@@ -7,6 +7,7 @@
 
 
 import styles from '../../styles/stylesForm.module.css';
+import Form from 'react-bootstrap/Form';
 
 function BasicInfo({
   basics: {
@@ -22,8 +23,10 @@ function BasicInfo({
   const send = e => { handleInputChange(e, 'basics') }
 
   return (
-    <>
-      <input
+    <Form.Group className="mb-3">
+      <Form.Control
+        size='lg'
+        type='text'
         className={styles.form_item}
         value={predialID}
         name='predialID'
@@ -32,7 +35,9 @@ function BasicInfo({
         required
       />
 
-      <input
+      <Form.Control
+        size='lg'
+        type='text'
         className={styles.form_item}
         name='name'
         value={name}
@@ -41,7 +46,9 @@ function BasicInfo({
         required
       />
 
-      <input
+      <Form.Control
+        size='lg'
+        type='text'
         className={styles.form_item}
         name='department'
         value={department}
@@ -50,7 +57,9 @@ function BasicInfo({
         required
       />
 
-      <input
+      <Form.Control
+        size='lg'
+        type='text'
         className={styles.form_item}
         name='municipality'
         value={municipality}
@@ -59,7 +68,9 @@ function BasicInfo({
         required
       />
 
-      <input
+      <Form.Control
+        size='lg'
+        type='text'
         className={styles.form_item}
         name='value'
         value={value}
@@ -67,7 +78,7 @@ function BasicInfo({
         placeholder='Avaluo'
         required
       />
-    </>
+    </Form.Group>
   )
 }
 

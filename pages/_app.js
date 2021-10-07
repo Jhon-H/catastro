@@ -7,6 +7,8 @@ import Head from 'next/head';
 import client from '../lib/apollo';
 import store from '../store';
 import '../styles/nprogress.css';
+import '../styles/global.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 
 function MyApp({ Component, pageProps }) {

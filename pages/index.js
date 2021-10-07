@@ -30,7 +30,7 @@ function Home() {
   }, [data]);
 
   return (
-    <LayoutDiv title='Home'>
+    <LayoutDiv title='Inicio'>
       {loading && <Loading />}
       {error && <Error />}
       <Space

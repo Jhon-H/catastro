@@ -1,63 +1,60 @@
-// Propietarios: (poder agregar más, iniciar en 0)
-// *   TIPO : natural o juridica (depende del valor se deplegan las opciones)
-// *       natural:
-// *          Tipo de docuemnto
-// *          numero de documento
-// *          Nombres
-// *          apellidos
-// *          direccion
-// *          telefono
-// *          correo
-// * 
-// *        juruduca
-// *           razon social 
-// *           NIT
-// *   datos en comun
-// * 
-
-import {
-  Form,
-  Input,
-} from 'antd';
+import NaturalPerson from './NaturalPerson';
+import JuridicPerson from './JuridicPerson';
+import Form from 'react-bootstrap/Form';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import { DeleteOutlined } from '@ant-design/icons';
 import styles from '../../styles/stylesForm.module.css';
 
-
-function Owners({
-  type,
-  natural,
-  juridic,
-  handleInputChange
-}) {
+function Owners({ owners, handleInputChange, deleteOwner }) {
   return (
     <>
-      <Form.Item
-        name='value'
-        onChange={handleInputChange}
-        rules={[{ required: true }]}
-      >
-        {(type === 'natural'
-          ? <NaturalPerson handleInputChange={handleInputChange} natural={natural} type={type}/>
-          : <JuridicPerson handleInputChange={handleInputChange} juridic={juridic} type={type}/>
-      )}
+      {
+        Object.keys(owners).map(idOwner => {
+          const owner = owners[idOwner];
 
-      </Form.Item>
+          return <div key={idOwner} className={styles.groupFields}>
+            <Row className={styles.owner_row_options}>
+              <Col>
+                <Form.Select
+                  name='type'
+                  value={owner.type}
+                  onChange={(e) => handleInputChange(e, 'owners', idOwner)}
+                  placeholder='Elije un tipo'
+                  className={styles.select}
+                  required
+                >
+                  <option value='' disabled> Tipo de persona </option>
+                  <option value='natural'> Persona Natural </option>
+                  <option value='juridic'> Persona Jurídica </option>
+                </Form.Select>
+              </Col>
 
+              <Col>
+                <Button
+                  onClick={() => deleteOwner(idOwner)}
+                  variant='danger'
+                  className={styles.trashContainer}
+                >
+                  <DeleteOutlined className={styles.trashIcon} />
+                </Button>
+              </Col>
+            </Row>
+
+            {owner.type !== '' &&
+              (owner.type === 'natural'
+                ? <NaturalPerson handleInputChange={handleInputChange}
+                  natural={{ idOwner, ...owner.natural }} />
+                : <JuridicPerson handleInputChange={handleInputChange}
+                  juridic={{ idOwner, ...owner.juridic }} />
+              )
+            }
+          </div>
+        })
+      }
     </>
   )
 }
 
 export default Owners;
-
-/**
- * <Form.Item
-        name='value'
-        onChange={handleInputChange}
-        rules={[{ required: true }]}
-      // className={styles.form_item}
-      >
-        <Input
-          value={value}
-          placeholder='Nombre del predial'
-        />
-      </Form.Item> { value }
- */

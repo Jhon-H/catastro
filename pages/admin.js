@@ -31,7 +31,7 @@ function Administracion() {
   }, [data]);
 
   return (
-    <LayoutDiv title='Home'>
+    <LayoutDiv title='Administacion'>
       {loading && <Loading />}
       {error && <Error />}
 
@@ -48,13 +48,14 @@ function Administracion() {
         size={50}
         wrap
       >
-        {(!loading && data
-          ? data && data.municipio.map(({ name, id }) => (
-            <CardDiv name={name} id={id} key={id} />
-          ))
-          : <div className={styles.empty}>
-            <Empty description={<span> Aún no hay información </span>} />
-          </div>
+        {!loading && (
+          data
+            ? data && data.municipio.map(({ name, id }) => (
+              <CardDiv name={name} id={id} key={id} />
+            ))
+            : <div className={styles.empty}>
+              <Empty description={<span> Aún no hay información </span>} />
+            </div>
         )}
       </Space>
 

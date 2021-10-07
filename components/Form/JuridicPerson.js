@@ -5,10 +5,7 @@
 // *    telefono
 // *   correo (opcional)
 
-import {
-  Form,
-  Input,
-} from 'antd';
+import Form from 'react-bootstrap/Form';
 import styles from '../../styles/stylesForm.module.css';
 
 function JuridicPerson({
@@ -28,7 +25,7 @@ function JuridicPerson({
 
   return (
     <>
-      <input
+      <Form.Control
         name='razon_social'
         value={razon_social}
         className={styles.form_item}
@@ -37,7 +34,7 @@ function JuridicPerson({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='NIT'
         type='number'
@@ -47,7 +44,7 @@ function JuridicPerson({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='direccion'
         value={direccion}
@@ -56,7 +53,7 @@ function JuridicPerson({
         required
       />
 
-      <input
+      <Form.Control
         className={styles.form_item}
         name='telefono'
         value={telefono}
@@ -65,7 +62,7 @@ function JuridicPerson({
         required
       />
 
-      <input
+      <Form.Control
         type='email'
         className={styles.form_item}
         name='correo'

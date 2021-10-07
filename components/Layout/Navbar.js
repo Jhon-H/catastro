@@ -5,7 +5,7 @@ import Search from './Search';
 
 
 const customPaths = [
-  { path: '/', name: 'Home' },
+  { path: '/', name: 'Inicio' },
   { path: '/admin', name: 'Administrar' },
 ];
 
@@ -24,7 +24,6 @@ function NavbarDiv() {
             </Link>
           </Menu.Item>
         ))}
-        <Menu.Item> <Search /> </Menu.Item>
       </Menu>
     </Header>
   )

@@ -1,22 +1,24 @@
 import { useForm } from '../../hooks/useForm';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/stylesForm.module.css';
-import {
-  Form,
-  Input,
-  Button,
-  Select,
-} from 'antd';
-
 import BasicInfo from './BasicInfo';
 import Terreno from './Terreno';
-import NaturalPerson from './NaturalPerson';
-import JuridicPerson from './JuridicPerson';
-import Contructions from './Constructions';
+import Constructions from './Constructions';
+import Button from 'react-bootstrap/Button'
+import Form from 'react-bootstrap/Form';
+import Owners from './Owners';
 
 
 function FormDiv() {
-  const { form, handleInputChange, reset, addOwner, deleteOwner} = useForm({
+  const { form,
+    handleInputChange,
+    reset,
+    addOwner,
+    deleteOwner,
+    deleteConstruction,
+    addConstrution
+
+  } = useForm({
     basics: {
       predialID: '',
       name: '',
@@ -25,7 +27,6 @@ function FormDiv() {
       value: ''
     },
 
-    have_owners: 'no_have',
     owners: {},
 
     have_terreno: '',
@@ -35,7 +36,9 @@ function FormDiv() {
       type_terreno: '',
       fuente_cerca: '',
       have_contrucciones: ''
-    }
+    },
+
+    constructions: {}
   });
 
   const [isEdit, setIsEdit] = useState(false);
@@ -47,83 +50,102 @@ function FormDiv() {
     reset();
   }
 
-  const handleSubmitFailed = () => {
-    alert('error');
+
+  const [formstep, setFormstep] = useState(0);
+  const avance = useRef(null);
+  const retrocede = useRef(null);
+  useEffect(() => { if (!formstep) retrocede.current.disabled = true; }, []);
+
+
+  const avancePage = () => {
+    if (formstep === 0) retrocede.current.disabled = false;
+    if (formstep === 3) avance.current.disabled = true;
+    setFormstep(formstep => formstep + 1);
   }
 
-  const metaTags = name => {
-    return [
-      { name: name },
-      { onChange: handleInputChange, },
-      { rules: [{ required: true }] },
-      { className: styles.form_item },
-    ];
+  const retrocedePage = () => {
+    if (formstep === 4) avance.current.disabled = false;
+    if (formstep === 1) retrocede.current.disabled = true;
+    setFormstep(formstep => formstep - 1);
   }
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit}
-    >
+    <div className={styles.cotainer}>
+      <div className={styles.formDiv}>
+        <Form className={styles.form} onSubmit={handleSubmit}>
 
-      {/* Basic Info */}
-      <h2> Informacion basica </h2>
-      <BasicInfo handleInputChange={handleInputChange} basics={form.basics} />
+          {/* Basic Info */}
+          {formstep === 0 && <>
+            <h2 className={styles.title}> Informacion Básica </h2>
+            <BasicInfo handleInputChange={handleInputChange} basics={form.basics} /></>
+          }
 
-      {/*  Owners */}
-      <h2> Propietarios </h2>
-      <button onClick={addOwner}> Agregar Propietario </button>
-      {
-        Object.keys(form.owners).map(idOwner => {
-          const owner = form.owners[idOwner];
+          {/*  Owners */}
+          {formstep === 1 && <>
+            <h2 className={styles.title}> Propietarios </h2>
+            <Button onClick={addOwner} variant='secondary' className={styles.btnAdd}>
+              Agregar Propietario
+            </Button>
+            <Owners
+              handleInputChange={handleInputChange}
+              owners={form.owners}
+              deleteOwner={deleteOwner} /></>
+          }
 
-          return <div key={idOwner}>
-            <br /><br />
-            <select
-              name='type'
-              value={owner.type}
-              onChange={(e) => handleInputChange(e, 'owners', idOwner)}
-              placeholder='Elije un tipo'
+          {/* Terreno */}
+          {formstep === 2 && <>
+            <h2 className={styles.title}> Terreno </h2>
+            <Form.Select
+              name='have_terreno'
+              value={form.have_terreno}
+              onChange={handleInputChange}
+              placeholder='Tiene terrneno'
+              className={styles.form_item}
               required
             >
-              <option value='' disabled> Elija </option>
-              <option value='natural'> Natural </option>
-              <option value='juridic'> Jurídica </option>
-            </select>
-            <button onClick={() => deleteOwner(idOwner)}> Eliminar </button>
-            <br />
-            {owner.type !== '' &&
-              (owner.type === 'natural'
-                ? <NaturalPerson handleInputChange={handleInputChange}
-                  natural={{ idOwner, ...owner.natural }} />
-                : <JuridicPerson handleInputChange={handleInputChange}
-                  juridic={{ idOwner, ...owner.juridic }} />
-              )
-            }
-          </div>
-        })
-      }
+              <option value='' selected disabled> ¿Tiene terreno? </option>
+              <option value='no_have'> NO </option>
+              <option value='have'> SI </option>
+            </Form.Select>
 
-      {/* Terreno */}
-      <h2> Terreno </h2>
-      <select
-        name='have_terreno'
-        value={form.have_terreno}
-        onChange={handleInputChange}
-        placeholder='Tiene terrneno'
-        className={styles.form_item}
-        required
-      >
-        <option value='have'> SI </option>
-        <option value='no_have'> NO </option>
-      </select>
+            {form.have_terreno === 'have' && (
+              <Terreno handleInputChange={handleInputChange} terreno={form.terreno} />
+            )}</>
+          }
 
-      {form.have_terreno === 'have' && (
-        <Terreno handleInputChange={handleInputChange} terreno={form.terreno} />
-      )}
+          {/*  Construcciones */}
+          {formstep === 3 && <>
+            <h2 className={styles.title}> Construciones </h2>
+            <Button onClick={addConstrution} variant='secondary' className={styles.btnAdd}>
+              Agregar construcción
+            </Button>
+            <Constructions
+              handleInputChange={handleInputChange}
+              constructions={form.constructions}
+              deleteConstruction={deleteConstruction}
+            />
+          </>
+          }
 
-      {/*  Construcciones */}
-    </form>
+          {/*  SEND */}
+          {formstep === 4 &&
+            <>
+              <p> SEND </p>
+            </>
+          }
+
+        </Form>
+      </div>
+
+      <div className={styles.pagnDiv}>
+        <Button variant='primary' onClick={retrocedePage} ref={retrocede} size='lg'>
+          Retroceder
+        </Button>
+        <Button variant='primary' size='lg' onClick={avancePage} ref={avance}>
+          Avanzar
+        </Button>
+      </div>
+    </div>
   )
 }
 

@@ -1,4 +1,80 @@
 .form_item {
-  width: 700px;
-  margin: 2px;
+  width: 100%;
+  margin: 2px 0;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 7px;
+}
+
+.select{ 
+  border-radius: 7px;
+  padding: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cotainer {
+  padding: 20px 30px;
+  border: 2px solid #bdbdbdb7;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 45px auto;
+  width: 800px;
+}
+
+.btnPagn {
+
+}
+
+.pagnDiv {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  padding: 0 5px;
+}
+
+.form {
+
+}
+
+.formDiv {
+  min-height: 270px;
+  width: 100%;
+}
+
+.title{
+  text-align: center;
+  font-weight: bold; 
+  font-size: 30px;
+  margin-bottom: 30px;
+  color: #303030;
+}
+
+
+
+.trashIcon{
+  font-size: 18px;
+}
+
+.trashContainer {
+  height: 35px;
+}
+
+.owner_row_options{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+
+.btnAdd{
+  font-weight: bold;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.groupFields{
+  margin-bottom: 25px;
 }
