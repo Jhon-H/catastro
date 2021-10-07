@@ -27,12 +27,12 @@ const QUERY = gql`
 
 
 const QUERY2 = gql`
-  mutation MyMutation(  $basics: json,
+  mutation MyMutation( $id: Int!, $basics: json,
   $constructions: json,
   $have_terreno: Boolean,
   $owners: json,
   $terreno: json) {
-  update_municipio_by_pk(pk_columns: {id: 10},
+  update_municipio_by_pk(pk_columns: {id: $id},
   _set: {
     basics: $basics, 
     constructions: $constructions, 
@@ -42,7 +42,7 @@ const QUERY2 = gql`
 }`;
 
 
-function FormDiv({ isEdit, editData, setIsEdit }) {
+function FormDiv({ isEdit, editData, setIsEdit, setEditData}) {
   const { form,
     handleInputChange,
     reset,
@@ -111,6 +111,7 @@ function FormDiv({ isEdit, editData, setIsEdit }) {
       if (isEdit) {
         mutateEditFunction({
           variables: {
+            id: editData.id,
             basics: form.basics,
             constructions: form.constructions,
             have_terreno: (form.have_terreno === 'no_have' ? false : true),
@@ -118,7 +119,6 @@ function FormDiv({ isEdit, editData, setIsEdit }) {
             terreno: form.terreno
           }
         })
-        setIsEdit(false);
       }
       else mutateAddFunction({
         variables: {
@@ -129,8 +129,9 @@ function FormDiv({ isEdit, editData, setIsEdit }) {
           terreno: form.terreno
         }
       });
+      setIsEdit(false);
+      setEditData({});
       reset();
-
     }
   }
 

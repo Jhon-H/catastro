@@ -1,7 +1,6 @@
 import { Result, Button } from 'antd';
-import { RollbackOutlined } from '@ant-design/icons';
 import Link from 'next/link';
-import styles from '../styles/error404.module.css';
+
 
 function Custom404() {
   return (
@@ -10,7 +9,7 @@ function Custom404() {
       title='404'
       subTitle='OPS! La página que intentas visitar no existe.'
       extra={
-        <Button type='primary' icon={<RollbackOutlined />}>
+        <Button>
           <Link href='/'> Volver </Link>
         </Button>
       }

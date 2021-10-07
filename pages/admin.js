@@ -47,7 +47,7 @@ function Administracion() {
           size={50}
           wrap
         >
-          {(!loading && <Form isEdit={isEdit} editData={editData} setIsEdit={setIsEdit}/>)}
+          {(!loading && <Form isEdit={isEdit} editData={editData} setIsEdit={setIsEdit} setEditData={setEditData}/>)}
         </Space>
       </Row>
 
