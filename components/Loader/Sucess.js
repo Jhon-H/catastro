@@ -7,8 +7,7 @@ function Sucess() {
       {
         notification.success({
           message: 'Informción cargada correctamente',
-          description:
-            'Hemos registrado su información de manera existosa.',
+          description: 'Hemos registrado su información de manera existosa.',
         })
       }
     </Space>

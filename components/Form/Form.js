@@ -1,4 +1,5 @@
 import { useForm } from '../../hooks/useForm';
+import { useMutation, gql } from '@apollo/client';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from '../../styles/stylesForm.module.css';
 import BasicInfo from './BasicInfo';
@@ -8,15 +9,48 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form';
 import Owners from './Owners';
 
+const QUERY = gql`
+  mutation MyMutation(
+  $basics: json,
+  $constructions: json,
+  $have_terreno: Boolean,
+  $owners: json,
+  $terreno: json){
+  insert_municipio_one(object: {
+    basics: $basics, 
+    constructions: $constructions, 
+    have_terreno: $have_terreno,  
+    owners: $owners
+    terreno: $terreno
+  }){ id }
+}`;
 
-function FormDiv() {
+
+const QUERY2 = gql`
+  mutation MyMutation(  $basics: json,
+  $constructions: json,
+  $have_terreno: Boolean,
+  $owners: json,
+  $terreno: json) {
+  update_municipio_by_pk(pk_columns: {id: 10},
+  _set: {
+    basics: $basics, 
+    constructions: $constructions, 
+    have_terreno: $have_terreno,  
+    owners: $owners
+    terreno: $terreno}) { id }
+}`;
+
+
+function FormDiv({ isEdit, editData, setIsEdit }) {
   const { form,
     handleInputChange,
     reset,
     addOwner,
     deleteOwner,
     deleteConstruction,
-    addConstrution
+    addConstrution,
+    changeAll
 
   } = useForm({
     basics: {
@@ -41,15 +75,64 @@ function FormDiv() {
     constructions: {}
   });
 
-  const [isEdit, setIsEdit] = useState(false);
+  const handleCancel = e => {
+    reset();
+    setIsEdit(false);
+  }
+
+  useEffect(() => {
+    if (isEdit) changeAll(editData);
+  }, [isEdit]);
+
+  const [mutateAddFunction, { }] = useMutation(QUERY);
+  const [mutateEditFunction, { }] = useMutation(QUERY2);
+
+  const isValid = () => {
+    let flags = 0;
+    flags += (form.have_terreno !== '');
+    flags += (form.basics.predialID !== '');
+    flags += (form.basics.name !== '');
+    flags += (form.basics.departamet !== '');
+    flags += (form.basics.municipality !== '');
+    flags += (form.basics.value !== '');
+
+    if (flags !== 6) {
+      alert('Por favor revisa tus datos');
+      return false;
+    } else {
+      return true;
+    }
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
-    alert('what app');
-    // alert(JSON.stringify(form));
-    reset();
-  }
 
+    if (isValid()) { //revisar todo los datos
+      if (isEdit) {
+        mutateEditFunction({
+          variables: {
+            basics: form.basics,
+            constructions: form.constructions,
+            have_terreno: (form.have_terreno === 'no_have' ? false : true),
+            owners: form.owners,
+            terreno: form.terreno
+          }
+        })
+        setIsEdit(false);
+      }
+      else mutateAddFunction({
+        variables: {
+          basics: form.basics,
+          constructions: form.constructions,
+          have_terreno: (form.have_terreno === 'no_have' ? false : true),
+          owners: form.owners,
+          terreno: form.terreno
+        }
+      });
+      reset();
+
+    }
+  }
 
   const [formstep, setFormstep] = useState(0);
   const avance = useRef(null);
@@ -129,9 +212,11 @@ function FormDiv() {
 
           {/*  SEND */}
           {formstep === 4 &&
-            <>
-              <p> SEND </p>
-            </>
+            <div className={styles.containerBtn}>
+              <Button onClick={handleSubmit} className={styles.sendData} variant='success'>
+                ENVIAR DATOS
+              </Button>
+            </div>
           }
 
         </Form>
@@ -141,6 +226,11 @@ function FormDiv() {
         <Button variant='primary' onClick={retrocedePage} ref={retrocede} size='lg'>
           Retroceder
         </Button>
+        {isEdit &&
+          <Button variant='warning' onClick={handleCancel} size='lg'>
+            Cancelar
+          </Button>
+        }
         <Button variant='primary' size='lg' onClick={avancePage} ref={avance}>
           Avanzar
         </Button>

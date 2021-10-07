@@ -22,7 +22,7 @@ function BasicInfo({
 
   const send = e => { handleInputChange(e, 'basics') }
 
-  return (
+  return <div className={styles.groupFields}>
     <Form.Group className="mb-3">
       <Form.Control
         size='lg'
@@ -79,7 +79,7 @@ function BasicInfo({
         required
       />
     </Form.Group>
-  )
+  </div>
 }
 
 export default BasicInfo;

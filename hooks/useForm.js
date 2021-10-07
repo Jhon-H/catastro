@@ -25,13 +25,16 @@ export const useForm = (initialState = {}) => {
     setForm(update);
   }
 
+  const changeAll = data => {
+    setForm(data);
+  }
 
   const addConstrution = () => {
     const update = JSON.parse(JSON.stringify(form));
 
     update.constructions[uuidv4()] = {
-      number_pisos: 0,
-      area: 0,
+      number_pisos: '',
+      area: '',
       type_construction: '',
       direccion: ''
     };
@@ -84,6 +87,7 @@ export const useForm = (initialState = {}) => {
     addOwner,
     deleteOwner,
     addConstrution,
-    deleteConstruction
+    deleteConstruction,
+    changeAll
   }
 }

@@ -9,24 +9,26 @@ import Loading from '../components/Loader/Loading';
 import Error from '../components/Loader/Error';
 import CardDiv from '../components/Card/Card';
 
+
 const QUERY = gql`
   query getData {
     municipio {
+      basics
+      constructions
+      have_terreno
       id
-      name
+      owners
+      terreno
     }
   }
 `;
 
 function Home() {
-  const { loading, error, data } = useQuery(QUERY);
+  const { loading, error, data } = useQuery(QUERY, { pollInterval: 500 });
   const dispatch = useDispatch();
 
-
   useEffect(() => {
-    if (data) {
-      dispatch(saveNewData(data.municipio));
-    }
+    if (data) dispatch(saveNewData(data.municipio));
   }, [data]);
 
   return (
@@ -38,13 +40,16 @@ function Home() {
         size={50}
         wrap
       >
-        {(!loading && data
-          ? data.municipio.map(({ name, id }) => (
-            <CardDiv name={name} id={id} key={id} />
-          ))
-          : <div className={styles.empty}>
-            <Empty description={<span> Aún no hay información </span>} />
-          </div>
+        {(!loading &&
+          (data
+            ? data.municipio.map(data => (
+              <CardDiv data={data} key={data.basics.predialID} />
+            ))
+            : (<div className={styles.empty}>
+              <Empty description={<span> Aún no hay información </span>} />
+            </div>
+            )
+          )
         )}
       </Space>
     </LayoutDiv>

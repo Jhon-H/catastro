@@ -9,8 +9,7 @@ function Loading() {
         {
           notification.open({
             message: 'Actualizando información',
-            description:
-              'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+            description: 'Espere mientras terminar la operación',
             icon: <SyncOutlined spin />
           })
         }
