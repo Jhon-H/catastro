@@ -9,7 +9,7 @@ import LayoutDiv from '../../components/Layout/Layout';
 function CardOne() {
   const router = useRouter();
   const { dataReducer } = useSelector(state => state);
-  console.log(JSON.stringify(dataReducer));
+  console.log(dataReducer);
   const currData = dataReducer[router.query.id - 1];
   // const miData = miData.filter(e => e.id === router.query.id)[0];
 
