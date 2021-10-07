@@ -1,9 +1,9 @@
 import types from '../types/types';
-// return [...state, actions.payload];
 
 export const dataReducer = (state = [], actions) => {
   switch (actions.type) {
     case types.saveNewData:
+      console.log(actions.payload);  
       return [...state, actions.payload];
 
     default:

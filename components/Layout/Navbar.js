@@ -1,7 +1,6 @@
 import { Layout, Menu } from 'antd';
 import Link from 'next/link';
 import styles from '../../styles/logo.module.css';
-import Search from './Search';
 
 
 const customPaths = [
@@ -14,7 +13,9 @@ function NavbarDiv() {
 
   return (
     <Header style={{ padding: '0 200px' }}>
-      <div className={styles.logo} />
+      <div className={styles.logo}>
+        <h2 className={styles.logoTitle}> CATASTRO </h2>
+      </div>
 
       <Menu theme='dark' mode='horizontal' >
         {customPaths.map(({ path, name }) => (

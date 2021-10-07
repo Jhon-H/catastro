@@ -6,9 +6,8 @@
   background: rgba(255, 255, 255, 0.3);
 }
 
-.search {
-  float: right;
-  width: 120px;
-  height: 31px;
-  background: rgba(255, 255, 255, 0.3);
+
+.logoTitle{
+  text-align: center;
+  color: rgba(255, 255, 255, 0.705);
 }
