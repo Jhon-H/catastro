@@ -44,11 +44,7 @@
   flex-direction: column;
   justify-content: space-between;
   margin: 45px auto;
-  width: 800px;
-}
-
-.btnPagn {
-
+  width: min(800px, 95vw);
 }
 
 .pagnDiv {
@@ -58,9 +54,6 @@
   padding: 0 5px;
 }
 
-.form {
-
-}
 
 .formDiv {
   min-height: 270px;

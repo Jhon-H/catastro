@@ -28,7 +28,9 @@ function Home() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data) dispatch(saveNewData(data.municipio));
+    if (data){
+      dispatch(saveNewData(data.municipio));
+    }
   }, [data]);
 
   return (
